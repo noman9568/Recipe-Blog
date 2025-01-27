@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="cache-control" content="no-store" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <title>Home Page</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-size: 1.05rem;
+      font-family: 'Poppins',serif;
+    }
+    body{
+      min-height: 100vh;
+      background: linear-gradient(to bottom, #c1d5ff, #FFFFFF);
+    }
+    form{
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    input{
+      border: 1px solid rgb(179, 179, 179);
+      border-radius: 5px;
+      padding: 4px;
+      font-size: 0.8rem;
+      width: 350px;
+    }
+    h1{
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    .login-container , .register-container{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      font-size: 1.1rem;
+      max-width: max-content;
+      box-shadow: 0px 2px 10px rgb(113, 113, 113);
+      padding: 2.5rem 1.5rem;
+      border-radius: 0.5rem;
+      background: linear-gradient(to bottom, #d5daf3, #FFFFFF);
+    }
+    .btn{
+      width: max-content;
+      background-color: white;
+      border-radius: 10px;
+      font-weight: 500;
+      padding: 0.25rem 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      border: 1px solid;
+    }
+    .btn:hover{
+      background-color: black;
+      color: white;
+      border: 1px solid;
+    }
+    input:focus{
+      outline: 1px solid blue;
+    }
+    .register-container{
+      display: none;
+    }
+    .button{
+      color: blue;
+      margin-top: 0.8rem;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .button:hover{
+      color: black;
+    }
+    .register-message , .login-message{
+      color: red;
+      text-align: center;
+      font-size: 1rem;
+    }
+    @media (max-width:575px){
+      .login-container , .register-container{
+        padding: 2rem 1.5rem;
+      }
+      input{
+        width: 300px;
+      }
+      .btn{
+        width: max-content;
+      }
+    }
+    @media (max-width:425px) {
+      input{
+        width: 270px;
+      }
+      *{
+        font-size: 14.5px;
+      }
+      .btn{
+        width: max-content;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Login</h1><br>
+    <form id="login-form">
+      <label for="username">Username :</label>
+      <input type="text" name="username" placeholder="Enter your username...">
+      <label for="password">Password :</label>
+      <input type="text" name="password" placeholder="Enter your password...">
+      <input type="submit" value="Login" class="btn">
+      <p class="register-click button">Click to Register</p>
+      <div class="login-message"></div>
+    </form>
+  </div>
+  <br><br>
+  <div class="register-container">
+    <h1>Register</h1><br>
+    <form id="register-form">
+      <label for="name">Name :</label>
+      <input type="text" name="name" placeholder="Enter your name..." required>
+      <label for="email">Email :</label>
+      <input type="text" name="email" placeholder="Enter your email..." required>
+      <label for="username">Username : </label>
+      <input type="text" name="username" placeholder="Enter your username..." required>
+      <label for="phone">Phone no. :</label>
+      <input type="tel" name="phone" placeholder="Enter your phone...">
+      <label for="password">Password :</label>
+      <input type="text" name="password" placeholder="Enter your password..." required>
+      <input type="submit" value="Register" class="btn">
+      <p class="login-click button">Click to Login</p>
+      <div class="register-message"></div>
+    </form>
+  </div>
+  <script>
+
+
+    const register = document.querySelector('.register-click');
+    const rContainer = document.querySelector('.register-container');
+    const lcontainer = document.querySelector('.login-container');
+    const login = document.querySelector('.login-click');
+    register.addEventListener('click',()=>{
+      lcontainer.style.display = 'none';
+      rContainer.style.display = 'block';
+    })
+    login.addEventListener('click',()=>{
+      lcontainer.style.display = 'block';
+      rContainer.style.display = 'none';
+    })
+
+    document.querySelector('#register-form').addEventListener('submit',async (event)=>{
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+      
+
+      try {
+        const response = await fetch('/register',{
+          method : 'POST',
+          body : formData,
+        })
+        const data = await response.json();
+        const message = document.querySelector('.register-message');
+        if(response.status === 409){
+          message.textContent = data.message;
+        }
+        else if(response.ok){
+          const result = await response.json();
+          message.textContent = data.message;
+        }
+      }
+      catch(err){
+        console.log('Network Error');
+      }
+    })
+    
+    document.querySelector('#login-form').addEventListener('submit',async (e)=>{
+      e.preventDefault();
+      const formLogin = e.target;
+      const formLoginData = new FormData(formLogin);
+
+      const response = await fetch('/login',{
+        method : 'POST',
+        body : formLoginData,
+      })
+
+      const data = await response.json();
+      console.log(data)
+
+      if(response.ok){
+        window.location.href = '/home';
+      }
+      else{
+        const message = document.querySelector('.login-message');
+        message.textContent = data.message;
+      }
+    })
+    
+
+    // fetch('/register')
+    // .then(response=> response.json())
+    // .then(data=>{
+    //   document.querySelector('.register-message').innerText += data.regError;
+    // })
+
+
+  </script>
+</body>
+</html>
