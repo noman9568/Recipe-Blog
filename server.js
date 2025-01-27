@@ -18,7 +18,7 @@ const isAuthenticated = require('./middlerware/auth');
 
 require('dotenv').config();
 
-mongoose.connect('mongodb+srv://nomanhussain110504:lw0Idcc3tDXrmUiL@testing.pplfu.mongodb.net/?retryWrites=true&w=majority&appName=Testing')
+mongoose.connect(MONGO_URI);
 
 
 app.set("view engine","ejs");
