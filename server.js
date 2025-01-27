@@ -14,6 +14,7 @@ const mongoose = require('mongoose');
 const userDetails = require('./models/userDetails');
 const recipeData = require('./models/recipeData');
 const MONGO_URI = process.env.MONGO_URI;
+const PORT = process.env.PORT || 3000 ;
 const isAuthenticated = require('./middlerware/auth');
 
 require('dotenv').config();
@@ -197,6 +198,6 @@ app.get('/yourRecipe',isAuthenticated,async (req,res)=>{
 })
 
 
-app.listen(3000,()=>{
+app.listen(PORT,()=>{
   console.log('Server running on server 3000.');
 })
