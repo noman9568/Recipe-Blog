@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
+  <link rel="stylesheet" type="text/css" href="/css/headerStyle.css">
+  <title>View <%= recipe.title %></title>
+  <style>
+    body{
+      min-height: 100vh;
+      background: linear-gradient(to bottom, #dee9ff, #FFFFFF);
+    }
+    .recipe-container{
+      width: 90vw;
+      margin: 0 auto;
+      display: flex;
+      gap: 3rem;
+    }
+    .like, .comment{
+      width: 90vw;
+      margin: 0 auto;
+    }
+    .image{
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: fit-content;
+    }
+    .img{
+      height: 19rem;
+      width: 19rem;
+    }
+    .image img{
+      border: 2px solid red;
+      /* max-width: 400px;
+      height: auto; */
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    .image p{
+      font-size: 1.7rem;
+      font-weight: 500;
+      font-family: 'Poppins',sans-serif;
+      color: rgb(79, 0, 122);
+    }
+    .recipe-content{
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .desc , .ingre{
+      font-size: 1.5rem;
+      font-family: 'Poppins',serif;
+      color: rgb(153, 0, 0);
+    }
+    .desc span{
+      font-size: 1.4rem;
+      font-family: 'Montserrat',serif;
+      font-weight: 500;
+      color: rgb(27, 27, 27);
+    }
+    .recipe-list{
+      display: flex;
+      gap: 0.5rem;
+      flex-direction: column;
+      color: blue;
+      padding-left: 0;
+    }
+    .recipe-list li{
+      text-indent: 2rem;
+      list-style-type: circle;
+      list-style-position: inside;
+    }
+    .like-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .like-button:hover {
+      transform: scale(1.1); /* Adds a hover animation */
+    }
+
+  /* SVG Icon Styles */
+    .like-icon path {
+      transition: all 0.2s ease;
+    }
+    form{
+      margin-top: 2rem;
+    }
+    input{
+      border: 0;
+      border-bottom: 1px solid grey;
+      font-size: 1.1rem;
+      width: 25rem;
+      min-width: 350px;
+      padding: 3px 8px;
+      font-family: 'Montserrat',sans-serif;
+    }
+    input:focus{
+      outline: 0;
+    }
+    .comment{
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .comments-box{
+      display: flex;
+      flex-direction: column;
+      gap: 1.2em;
+      width: 25rem;
+      /* min-width: 350px; */
+    }
+    .comments-box p{
+      padding: 1px 4px;
+      font-family: 'Roboto',serif;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid rgb(184, 184, 184);
+      font-size: 1rem;
+    }
+
+    @media (max-width:650px){
+      .image img{
+        max-width: 300px;
+      }
+    }
+    @media (max-width:575px) {
+      .recipe-container{
+        display: block;
+      }
+      .recipe-content{
+        margin-top: 2rem;
+      }
+    }
+    @media (max-width:425px){
+      *{
+        font-size: 13px;
+      }
+      input{
+        min-width: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <%- include('partials/header') %>
+  <br><br><br>
+  <div class="recipe-container">
+    <div class="image">
+      <div class="img"><img src="/image/<%= recipe._id %>"></div>
+      <p><%= recipe.title %></p>
+    </div>
+    <div class="recipe-content">
+      <div class="desc">
+        Description : <span><%= recipe.description %></span>
+      </div>
+      <div class="ingre">
+        Ingredients : 
+        <ul class="recipe-list">
+          <%
+          recipe.ingredients.forEach(temp=>{ %>
+              <li><%= temp %></li>
+            <% })
+          %>
+        </ul>
+      </div>
+    </div>
+  </div><br>
+  <div class="like">
+    <button class="like-button">
+      <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="35"
+          height="35"
+          class="like-icon"
+      >
+          <path
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              fill="none"
+              stroke="black"
+              stroke-width="1.5"
+          />
+      </svg>
+  </button>
+  <p class="like-count"><%= likes %> Likes</p>
+  </div>
+  <div class="comment">
+    <div class="new-comment">
+      <form>
+        <input type="text" name="comment" placeholder="Enter your response...">
+      </form>
+    </div>
+    <div class="comments-box">
+      <%
+        comment.forEach(eachcomment=>{ %>
+            <p><%=eachcomment%></p>
+          <% })
+      %>
+    </div>
+  </div>
+  <br>
+  <script>
+
+    const image = document.querySelector('img');
+    function imageResize() {
+      if(window.innerWidth <= '700' && image.naturalHeight > image.naturalWidth){
+        image.style.width = '240px';
+      }
+    }
+    imageResize();
+    window.addEventListener('resize',imageResize);
+    const likeButton = document.querySelector('.like-button');
+    const likeCount = document.querySelector('.like-count');
+    const likeIcon = document.querySelector('.like-icon path');
+    let isLiked = <%= liked ? 'true' : 'false' %>;
+    // let likes = '<%=likes%>';
+    // console.log(isLiked, likes);
+
+    if(isLiked) {
+      console.log(isLiked);
+      likeIcon.style.fill = 'red';
+      likeIcon.style.stroke = 'red';
+    } else{
+      likeIcon.style.fill = 'white';
+      likeIcon.style.stroke = 'black';
+    }
+
+    likeButton.addEventListener('click', function () {
+      if(!isLiked) {
+        fetch('/like/<%=recipe._id%>',{
+        method : 'POST',
+        headers : {
+          'Content-Type' : 'application/json',
+        }
+      })
+      .then(response=> response.json())
+      .then((data)=>{
+        if(data.success){
+          likeCount.textContent = `${data.likes} Likes`;
+          likeIcon.style.fill = 'red';
+          likeIcon.style.stroke = 'red';
+          isLiked = true;
+        }
+      })
+      }
+      else{
+        fetch('/unlike/<%=recipe._id%>',{
+        method : 'POST',
+        headers : {
+          'Content-Type' : 'application/json',
+        }
+      })
+      .then(response=> response.json())
+      .then((data)=>{
+        if(data.success){
+          likeCount.textContent = `${data.likes} Likes`;
+          likeIcon.style.fill = 'white';
+          likeIcon.style.stroke = 'black';
+          isLiked = false;
+        }
+      })
+      }
+    });
+
+    document.querySelector('form').addEventListener('submit',(event)=>{
+      event.preventDefault();
+
+      const input = event.target.comment;
+      const commentText = input.value.trim();
+
+      if(commentText){
+        fetch('/comment/<%=recipe._id%>',{
+        method : 'POST',
+        headers : {
+          'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify({ comment: commentText })
+      })
+      .then(response=> response.json())
+      .then((data)=>{
+        const commentBox = document.querySelector('.comments-box');
+        const newComment = document.createElement('p');
+        newComment.textContent = commentText;
+        commentBox.appendChild(newComment);
+        input.value = '';
+      });
+      }
+    })
+
+    const profile = document.querySelector('.profileBtn');
+    profile.addEventListener('click', () => {
+      const profilecard = document.querySelector('.profile-card');
+      profilecard.style.display = profilecard.style.display === 'none' || profilecard.style.display === '' ? 'flex' : 'none';
+    });
+    const profileDrop = document.querySelector('.profileBtn_drop');
+    profileDrop.addEventListener('click', () => {
+      const profilecardDrop = document.querySelector('.profile-cardDrop');
+      profilecardDrop.style.display = profilecardDrop.style.display === 'none' || profilecardDrop.style.display === '' ? 'flex' : 'none';
+    });
+    const drop = document.querySelector('.drop_menu');
+    drop.addEventListener('click',()=>{
+      const dropdown = document.querySelector('.dropdown');
+      dropdown.classList.toggle('open');
+    })
+  </script>
+</body>
+</html>

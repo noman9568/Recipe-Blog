@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  /* outline: 1px solid red; */
+}
+
+.head-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Poppins',serif;
+  width: 90vw;
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-top: 1rem; */
+  height: 80px;
+}
+.head-container p{
+  font-size: 1.9rem;
+  font-weight: 500;
+  color: rgb(1, 1, 120);
+}
+.head-container p span{
+  color: rgb(207, 1, 1);
+}
+.small-logo{
+  display: none;
+}
+ul{
+  display: flex;
+  gap: 1.7rem;
+}
+.headerList{
+  display: flex;
+  align-items: center;
+}
+.headerList li{
+  display: flex;
+  align-items: center;
+}
+.headerList_drop{
+  display: none;
+}
+li{
+  list-style-type: none;
+}
+li a{
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: rgb(14, 38, 175);
+  text-decoration: none;
+}
+
+
+.material-symbols-outlined {
+  cursor: pointer;
+  font-size: 2rem;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.profile-image{
+  cursor: default;
+  font-size: 3rem;
+}
+.profile-list{
+  position: absolute;
+  right: 5vw;
+  top: 60px;
+}
+.profile-card , .profile-cardDrop{
+  display: none;
+  background-color: rgb(251, 251, 251);
+  z-index: 99;
+  border: 1px solid;
+  padding: 0.7rem 0.3rem;
+  border-radius: 3px;
+  /* min-width: 7.5rem; */
+  max-width: 8.5rem;
+  /* min-height: 8.5rem; */
+  max-height: 10rem;
+  /* display: flex; */
+  flex-direction: column;
+  align-items: center;
+}
+.profile-cardDrop{
+  position: relative;
+}
+.name{
+  font-size: 0.9rem;
+  text-align: center;
+}
+.username{
+  font-size: 0.8rem;
+  color: grey;
+  text-align: center;
+}
+.logout{
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  /* border-width: 2px; */
+}
+
+
+.drop_menu{
+  height: 30px;
+}
+.headerList_drop li{
+  display: flex;
+  align-items: center;
+}
+
+
+.addrecipe-smallbtn , .logout{
+  background-color: red;
+  border: 1px solid rgb(173, 173, 173);
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 1px 0.5rem;
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+.addrecipe-smallbtn:hover{
+  background-color: transparent;
+  color: black;
+}
+.logout:hover{
+  background-color: rgb(224, 224, 224);
+  color: black;
+}
+.front_Image{
+  position: relative;
+}
+.front_Image img{
+  height: 550px;
+  width: 100%;
+  object-fit: cover;
+}
+.content{
+  font-size: 1.5rem;
+  color: black;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+}
+.nothing{
+  height: 500px;
+}
+.content{
+  /* border: 1px solid red; */
+  border-radius: 10px;
+  padding: 0.5rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 0px 0px 6px black;
+  max-width: max-content;
+}
+.content p{
+  text-align: center;
+  color: rgb(0, 112, 32);
+  font-family: 'Playfair Display',serif;
+  font-size: 2rem;
+}
+.content p:first-child{
+  color: rgb(6, 78, 26);
+}
+
+
+
+
+
+
+.dropdown{
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0 0.5rem;
+  background-color: rgb(199, 199, 199);
+  max-height: 0;
+  border-radius: 2px;
+  transition: all 0.5s ease-in-out;
+}
+.dropdown.open{
+  max-height: 300px;
+  padding: 0.4rem 0.5rem;
+}
+.dropdown.close{
+  max-height: 0;
+  ul{
+    max-height: 0;
+  }
+}
+.dropdown ul{
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 1rem;
+  font-family: 'Poppins',sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width:1050px){
+  .content p{
+    font-size: 1.7rem;
+  }
+}
+@media (max-width:860px){
+  .head-container p span{
+    font-size: 1.9rem;
+  }
+  *{
+    font-size: 15px;
+  }
+  li a{
+    font-size: 1rem;
+  }
+}
+@media (max-width:700px){
+  *{
+    font-size: 14px;
+  }
+  ul{
+    gap: 1.1rem;
+  }
+  .head-container{
+    width: 92vw;
+  }
+  .profile-card{
+    min-width: 7rem;
+    min-height: 8rem;
+  }
+}
+@media (max-width:600px) {
+  .big-screen-logo{
+    display: none;
+  }
+  .small-logo{
+    display: block;
+  }
+}
+@media (max-width:525px) {
+  *{
+    font-size: 13px;
+  }
+  ul{
+    gap: 0.9rem;
+  }
+  .head-container{
+    width: 94vw;
+  }
+  .headerList{
+    display: none;
+  }
+  .headerList_drop{
+    display: flex;
+  }
+}

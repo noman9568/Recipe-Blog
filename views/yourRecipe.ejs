@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
+  <link rel="stylesheet" type="text/css" href="/css/headerStyle.css">
+</head>
+<style>
+    body{
+      min-height: 100vh;
+      background: linear-gradient(to bottom, #dee9ff, #FFFFFF);
+      font-family: 'Montserrat',sans-serif;
+    }
+    .recipe-container{
+      width: 90vw;
+      margin: 0 auto;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    h2{
+      font-size: 2.1rem;
+    }
+    .image-name p{
+      font-family: 'Poppins',serif;
+      font-weight: 500;
+      font-size: 1.5rem;
+      color: rgb(87, 3, 87);
+    }
+    .image-name a{
+      color: blue;
+      font-size: 0.9rem;
+    }
+    .image-box img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border: 2px solid red;
+      border-radius: 5px;
+    }
+    .image-box{
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      /* max-width: 15rem; */
+      /* object-fit: cover; */
+    }
+    .images-container{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(12rem, 0.5fr));
+      gap: 1.5rem;
+      /* flex-shrink: 1;
+      flex-wrap: wrap; */
+    }
+</style>
+<body>
+  <%- include('./partials/header') %>
+  <br><br>
+  <div class="recipe-container">
+    <h2>Your Recipes</h2>
+    <div class="images-container">
+      <%
+      recipe.forEach((item)=>{ %>
+        <div class="image">
+          <div class="image-box">
+            <img src="/image/<%= item._id %>" alt="<%= item.title %>">
+          </div>
+          <div class="image-name">
+            <p><%= item.title %></p>
+            <a href="/view/<%= item._id %>" class="seemore">See more</a>
+          </div>
+        </div>
+        <% })
+      %>
+    </div>
+  </div>
+  <script>
+    const profile = document.querySelector('.profileBtn');
+    profile.addEventListener('click', () => {
+      const profilecard = document.querySelector('.profile-card');
+      profilecard.style.display = profilecard.style.display === 'none' || profilecard.style.display === '' ? 'flex' : 'none';
+    });
+    const profileDrop = document.querySelector('.profileBtn_drop');
+    profileDrop.addEventListener('click', () => {
+      const profilecardDrop = document.querySelector('.profile-cardDrop');
+      profilecardDrop.style.display = profilecardDrop.style.display === 'none' || profilecardDrop.style.display === '' ? 'flex' : 'none';
+    });
+    const drop = document.querySelector('.drop_menu');
+    drop.addEventListener('click',()=>{
+      const dropdown = document.querySelector('.dropdown');
+      if (dropdown.classList.contains('open')) {
+      dropdown.classList.remove('open');
+      dropdown.classList.add('closed');
+      } else {
+      dropdown.classList.remove('closed');
+      dropdown.classList.add('open');
+      }
+    })
+  </script>
+</body>
+</html>

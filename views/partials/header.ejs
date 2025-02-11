@@ -1,0 +1,45 @@
+<header>
+  <div class="head-container">
+    <p class="big-screen-logo">Recipe <span>Blog</span></p>
+    <p class="small-logo">Recipe<span>B</span></p>
+    <nav>
+      <ul class="headerList">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/yourRecipe">Your Recipes</a></li>
+        <li><a href="/addRecipe" class="addrecipe-smallbtn">Add +</a></li>
+        <li>
+          <span class="material-symbols-outlined profileBtn">account_circle</span>
+        </li>
+        <li class="profile-list"><div class="profile-card">
+          <span class="material-symbols-outlined profile-image">account_circle</span>
+          <div class="name"><%=name%></div>
+          <div class="username">@<%=username%></div>
+          <a href="/logout" class="logout">LogOut</a>
+          <a href="/dashboard" class="dashboard" style="color: rgb(255, 255, 255); font-size: 0.85rem; margin-top: 0.3rem; border: 1px solid; border-radius: 0.25rem; background-color: rgb(62, 62, 62); padding: 0.1rem 0.3rem;">DashBoard</a>
+        </div></li>
+      </ul>
+      <ul class="headerList_drop">
+        <img src="/images/menu.png" class="drop_menu">
+        <li>
+          <span class="material-symbols-outlined profileBtn_drop">account_circle</span>
+        </li>
+        <li class="profile-list"><div class="profile-card profile-cardDrop">
+          <span class="material-symbols-outlined profile-image">account_circle</span>
+          <div class="name"><%=name%></div>
+          <div class="username">@<%=username%></div>
+          <a href="/logout" class="logout">LogOut</a>
+          <a href="/dashboard" class="dashboard" style="color: rgb(255, 255, 255); font-size: 0.85rem; margin-top: 0.3rem; border: 1px solid; border-radius: 0.25rem; background-color: rgb(62, 62, 62); padding: 0.1rem 0.3rem;">DashBoard</a>
+        </div></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="dropdown">
+    <ul>
+      <li><a href="/home">Home</a></li>
+      <hr>
+      <li><a href="/yourRecipe">Your Recipes</a></li>
+      <hr>
+      <li><a href="/addRecipe" class="addrecipe-smallbtn">Add +</a></li>
+    </ul>
+  </div>
+</header>
