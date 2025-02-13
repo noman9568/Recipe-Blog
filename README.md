@@ -1,5 +1,5 @@
 # Recipe Blog
-#
+--------------
 ## Frontend - EJS
 ## Backend - Node.js, Express.js, MongoDB
 -----------------------------------------
